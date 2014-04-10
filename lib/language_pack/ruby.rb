@@ -14,7 +14,8 @@ class LanguagePack::Ruby < LanguagePack::Base
   LIBYAML_PATH         = "libyaml-#{LIBYAML_VERSION}"
   BUNDLER_VERSION      = "1.5.2"
   BUNDLER_GEM_PATH     = "bundler-#{BUNDLER_VERSION}"
-  NODE_VERSION         = "0.4.7"
+  #NODE_VERSION         = "0.4.7"
+  NODE_VERSION         = "0.10.26"
   NODE_JS_BINARY_PATH  = "node-#{NODE_VERSION}"
   JVM_BASE_URL         = "http://heroku-jdk.s3.amazonaws.com"
   LATEST_JVM_VERSION   = "openjdk7-latest"
@@ -683,12 +684,12 @@ params = CGI.parse(uri.query || "")
   # @note execjs will blow up if no JS RUNTIME is detected and is loaded.
   # @return [Array] the node.js binary path if we need it or an empty Array
   def add_node_js_binary
-    # bundler.has_gem?('execjs') ? [NODE_JS_BINARY_PATH] : []
+    bundler.has_gem?('execjs') ? [NODE_JS_BINARY_PATH] : []
     # 
     # we never want this buildpack to install nodejs binaries
     # instead we are using ddollar's multibuildpack and 
     # including a standalone node buildpack
-    [ ]
+    #[ ]
   end
 
   def run_assets_precompile_rake_task
